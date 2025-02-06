@@ -24,5 +24,5 @@ export async function getRanking() {
     }
   })
 
-  return rankingWithScores
+  return { rankingWithScores }
 }

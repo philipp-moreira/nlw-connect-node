@@ -9,5 +9,5 @@ export async function getSubscriberInvitesCount({
 }: GetSubscriberInvitesCountParams) {
   const invites = await redis.zscore('referral:ranking', subscriberId)
 
-  return invites ?? 0
+  return { count: invites ? Number.parseInt(invites) : 0 }
 }

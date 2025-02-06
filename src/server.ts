@@ -7,7 +7,11 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
-import { env } from './env'
+import { accessInviteLinkRoute } from './routes/access-invite-link-route'
+import { getRankingRoute } from './routes/get-ranking-route'
+import { getSubscriberInvitesCountRoute } from './routes/get-subscriber-invites-count-route'
+import { getSubscriberRankingPositionRoute } from './routes/get-subscriber-ranking-position'
+import { subscribeToEventRoute } from './routes/subscribe-to-event-route'
 
 const app = fastify()
 
@@ -29,6 +33,12 @@ app.register(fastifySwagger, {
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
+
+app.register(subscribeToEventRoute)
+app.register(accessInviteLinkRoute)
+app.register(getRankingRoute)
+app.register(getSubscriberInvitesCountRoute)
+app.register(getSubscriberRankingPositionRoute)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP server running!')

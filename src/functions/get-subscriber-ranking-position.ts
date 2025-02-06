@@ -10,10 +10,10 @@ export async function getSubscriberRankingPosition({
   const rank = await redis.zrevrank('referral:ranking', subscriberId)
 
   if (!rank) {
-    return null
+    return { position: null }
   }
 
   const position = rank + 1
 
-  return position
+  return { position }
 }
