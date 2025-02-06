@@ -16,13 +16,15 @@ export async function getRanking() {
     .from(schema.subscriptions)
     .where(inArray(schema.subscriptions.id, Object.keys(ranking)))
 
-  const rankingWithScores = subscribersFromRanking.map(subscriber => {
-    return {
-      id: subscriber.id,
-      name: subscriber.name,
-      score: ranking[subscriber.id],
-    }
-  })
+  const rankingWithScores = subscribersFromRanking
+    .map(subscriber => {
+      return {
+        id: subscriber.id,
+        name: subscriber.name,
+        score: ranking[subscriber.id],
+      }
+    })
+    .sort((a, b) => b.score - a.score)
 
   return { rankingWithScores }
 }
