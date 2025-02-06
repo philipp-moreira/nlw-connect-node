@@ -7,6 +7,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
+import { env } from './env'
 import { accessInviteLinkRoute } from './routes/access-invite-link-route'
 import { getRankingRoute } from './routes/get-ranking-route'
 import { getSubscriberInvitesClicksRoute } from './routes/get-subscriber-invites-clicks-route'
@@ -42,6 +43,6 @@ app.register(getSubscriberInvitesCountRoute)
 app.register(getSubscriberInvitesClicksRoute)
 app.register(getSubscriberRankingPositionRoute)
 
-app.listen({ port: 3333 }).then(() => {
+app.listen({ port: env.PORT }).then(() => {
   console.log('HTTP server running!')
 })
