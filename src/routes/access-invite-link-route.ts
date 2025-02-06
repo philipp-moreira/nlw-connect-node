@@ -5,7 +5,7 @@ import { accessInviteLink } from '../functions/access-invite-link'
 
 export const accessInviteLinkRoute: FastifyPluginAsyncZod = async app => {
   app.get(
-    '/invite/:subscriberId',
+    '/invites/:subscriberId',
     {
       schema: {
         summary: 'Access invite link',

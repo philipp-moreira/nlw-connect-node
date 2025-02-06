@@ -7,6 +7,7 @@
     "source.organizeImports.biome": "explicit"
   },
   "cSpell.words": [
+    "hget",
     "hincrby",
     "zincrby",
     "zrevrange"

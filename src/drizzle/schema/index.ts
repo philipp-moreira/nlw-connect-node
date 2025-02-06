@@ -1,5 +1,5 @@
-import { subscriptions } from "./users";
+import { subscriptions } from './subscriptions'
 
 export const schema = {
-  subscriptions
+  subscriptions,
 }
