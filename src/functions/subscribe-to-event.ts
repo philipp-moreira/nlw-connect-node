@@ -2,7 +2,6 @@ import { eq } from 'drizzle-orm'
 import { db } from '../drizzle/client'
 import { schema } from '../drizzle/schema'
 import { redis } from '../redis/client'
-import { EmailAlreadyExists } from './errors/email-already-exists'
 
 interface SubscribeToEventParams {
   name: string
@@ -21,7 +20,7 @@ export async function subscribeToEvent({
     .where(eq(schema.subscriptions.email, email))
 
   if (results.length > 0) {
-    throw new EmailAlreadyExists()
+    return { subscriberId: results[0].id }
   }
 
   const [{ subscriberId }] = await db
