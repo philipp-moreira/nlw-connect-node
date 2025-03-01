@@ -2,11 +2,24 @@ services:
   connect-pg:
     image: bitnami/postgresql:latest
     ports:
-      - '5432:5432'
+      - "5432:5432"
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=connect
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "teste@teste.com"
+      PGADMIN_DEFAULT_PASSWORD: "teste"
+    ports:
+      - 16543:80
+    depends_on:
+      - connect-pg
 
   connect-redis:
     image: bitnami/redis:latest
@@ -14,5 +27,14 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "6379:6379"
+    volumes:
+      - rddata:/data
 
+  redisinsight:
+    image: redis/redisinsight:latest
+    ports:
+      - 5540:5540
 
+volumes:
+  pgdata:
+  rddata:
